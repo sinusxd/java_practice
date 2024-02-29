@@ -8,7 +8,7 @@ public class Main {
         // Создаем экземпляр нашего SimpleExecutorService с тремя потоками
         ExecutorService executorService = new SimpleExecutorService(3);
 
-        // Создаем и добавляем задачи для выполнения
+        //Создаем и добавляем задачи для выполнения
         for (int i = 0; i < 10; i++) {
             int taskId = i;
             executorService.submit(() -> {
