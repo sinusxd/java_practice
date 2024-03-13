@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Main'
+        )
+    }
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Зависимость для работы с Docker
+    implementation 'com.spotify:docker-client:8.16.0'
+}
+
+// Определение задачи
+task generateJar(type: Jar) {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Main'
+        )
+    }
+    from sourceSets.main.output // Исходные файлы для включения в JAR
+    archiveFileName = "${rootProject.name}.jar" // Название выходного JAR файла
+    destinationDirectory = file("$buildDir/libs") // Каталог для сохранения JAR файла
+}
+
+task buildDocker(type: Exec) {
+    dependsOn(generateJar)
+    commandLine 'docker', 'build', '-t', 'myapp', '.'
+}
+
+task runDocker(type: Exec) {
+    dependsOn(buildDocker)
+    commandLine 'docker', 'run', '--rm', 'myapp'
+}
+
+
+task buildAll {
+    dependsOn(runDocker)
+}
