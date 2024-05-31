@@ -1,0 +1,4 @@
+PhoneDTO{id=52, name='iPhone', creationYear='2023', manufactureId=52}
+PhoneDTO{id=102, name='Samsung', creationYear='2024', manufactureId=103}
+PhoneDTO{id=152, name='Xiaomi', creationYear='2020', manufactureId=52}
+PhoneDTO{id=202, name='newPhone', creationYear='2010', manufactureId=252}
